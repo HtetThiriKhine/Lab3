@@ -2,41 +2,38 @@ print("Lab 3 - Software Unit Testing with PyTest")
 
 SORT_ASCENDING = 0
 SORT_DESCENDING = 1
-
-
 def bubble_sort(arr, sorting_order):
+    # Check if no elements are entered
+    if len(arr) == 0:
+        return 0
+
+    # Check if all elements in the list are integers
+    if not all(isinstance(x, int) for x in arr):
+        return 2
+
+    # Check if 10 or more elements are entered
+    if len(arr) >= 10:
+        return 1
+
+    # Check if the sorting order is valid
+    if sorting_order not in [SORT_ASCENDING, SORT_DESCENDING]:
+        return []
 
     # Copy input list to results list
     arr_result = arr.copy()
+    n = len(arr_result);
 
-    # Get number of elements in the list
-    n = len(arr_result)
+    # Bubble Sort Algorithm
+    for i in range(n - 1):
+        for j in range(0, n - i - 1):
+            if sorting_order == SORT_ASCENDING:
+                if arr_result[j] > arr_result[j + 1]:
+                    arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
+            elif sorting_order == SORT_DESCENDING:
+                if arr_result[j] < arr_result[j + 1]:
+                    arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
 
-    if n < 10:
-        # Traverse through all array elements
-        for i in range(n - 1):
-            # range(n) also work but outer loop will
-            # repeat one time more than needed.
-
-            # Last i elements are already in place
-            for j in range(0, n - i - 1):
-
-                if sorting_order == SORT_ASCENDING:
-                    if arr_result[j] > arr_result[j + 1]:
-                        arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
-
-
-                elif sorting_order == SORT_DESCENDING:
-                    if arr_result[j] < arr_result[j + 1]:
-                        arr_result[j], arr_result[j + 1] = arr_result[j + 1], arr_result[j]
-
-                else:
-                    # Return an empty array
-                    arr_result = []
-    else:
-        arr_result = -1
-
-    return arr_result
+    return arr_result;
 
 def main():
     # Driver code to test above
@@ -53,6 +50,4 @@ def main():
     print(result)
 
 if __name__ == "__main__":
-    main()
-
-
+    main()  ;   
